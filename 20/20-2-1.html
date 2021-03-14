@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>範例 20-2-1.html</title>
+</head>
+<body>
+    <script>
+    //0 個或 1 個 a
+    let str = 'addbaccbaa';
+    let pattern = /ba?/g;
+    let match = null;
+    while( (match = pattern.exec(str)) !== null ){
+        console.log(match);
+    }
+
+    //0 個或更多的 a
+    str = 'addbaaaaaccbaa';
+    pattern = /ba*/g;
+    match = null;
+    while( (match = pattern.exec(str)) !== null ){
+        console.log(match);
+    }
+
+    //1個或更多的 a
+    str = 'addbaccbaaaaaa';
+    pattern = /ba+/g;
+    match = null;
+    while( (match = pattern.exec(str)) !== null ){
+        console.log(match);
+    }
+
+    //完整 3 個 a
+    str = 'addbaaaaaaccbaa';
+    pattern = /a{3}/g;
+    match = null;
+    while( (match = pattern.exec(str)) !== null ){
+        console.log(match);
+    }
+
+    //3 個以上的 a
+    str = 'a{3,}';
+    pattern = /a{3}/g;
+    match = null;
+    while( (match = pattern.exec(str)) !== null ){
+        console.log(match);
+    }
+    </script>
+</body>
+</html>

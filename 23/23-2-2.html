@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+
+        //方塊尺寸初始值
+        let size = 0;
+
+        //設定每 30 毫秒執行一次
+        setInterval(function(){
+            //清空畫布
+            ctx.clearRect(0, 0, 200, 200);
+
+            //繪製矩形
+            ctx.fillRect(0, 0, size, size);
+
+            //每執行 setInterval，就將 size 大小加 1
+            size++;
+
+            //若是大於 200 (畫布的寬度)，則從 0 開始
+            if(size > 200){
+                size = 0;
+            }
+        }, 30);
+    </script>
+</body>
+</html>

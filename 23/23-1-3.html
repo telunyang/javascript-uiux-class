@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+
+        //更改繪製顏色
+        ctx.fillStyle = 'Red'; //也可以用 RGB 碼，例如 #9487ff
+        ctx.fillRect(0, 0, 100, 100);
+    </script>
+</body>
+</html>

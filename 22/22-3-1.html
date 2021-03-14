@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>範例 22-3-1.html</title>
+</head>
+<body>
+    <p style="color: #7878ff; line-height: 3; font-size: 30px;">Hello World<br />Good job!</p>
+    
+    <script>
+    //取得 p 元素，並取得 style 屬性中的 css 屬性值
+    let p = document.getElementsByTagName('p')[0];
+    document.write("<br />");
+    document.write(p.style.color + "<br />");
+    document.write(p.style.lineHeight + "<br />");
+    document.write(p.style.fontSize + "<br />");
+
+    //設定 p 的 color 為 #ff0000
+    p.style.color = '#ff0000';
+    p.style['font-size'] = '80px'; //屬性可以用 css 格式
+    p.style['backgroundColor'] = '#CFEE99'; //屬性可以用 javascript 格式
+    </script>
+</body>
+</html>

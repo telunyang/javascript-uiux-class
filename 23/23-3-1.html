@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+
+        //定義畫「實心圓形」還是畫「圓線」的函式
+        let circle = function(x, y, radius, fillCircle){
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+            
+            //true 就填滿，false 就畫線
+            if(fillCircle) {
+                ctx.fill(); //填滿
+            } else {
+                ctx.stroke(); //畫線
+            }
+        }
+
+        //Ball 建構子
+        let Ball = function(){
+            //自訂屬性
+            this.x = 100;
+            this.y = 100;
+            this.xSpeed = -2;
+            this.ySpeed = 3;
+        };
+
+        //繪製球
+        Ball.prototype.draw = function(){
+            //畫圖的函式
+            circle(this.x, this.y, 2, true);
+        };
+
+        //移動球
+        Ball.prototype.move = function(){
+            /**
+             * 在碰撞檢查的時候，透過 xSpeed、ySpeed 的正負值改變，
+             * 來決定當前 x 或 y 應該往正或負的值移動
+             */
+            this.x += this.xSpeed;
+            this.y += this.ySpeed;
+        };
+
+        //碰撞檢查
+        Ball.prototype.checkCollision = function(){
+            //如果 this.x < 0，代表碰到左邊界; 如果 this.x > 200，代表碰到右邊界
+            if(this.x < 0 || this.x > 200){
+                this.xSpeed = -this.xSpeed;
+            }
+
+            //如果 this.y < 0，代表碰到上邊界; 如果 this.y > 200，代表碰到下邊界
+            if(this.y < 0 || this.y > 200){
+                this.ySpeed = -this.ySpeed;
+            }
+        };
+
+        //實體化一個物件
+        let ball = new Ball();
+
+        //設定每 30 毫秒執行一次
+        setInterval(function(){
+            //清空畫布
+            ctx.clearRect(0, 0, 200, 200);
+
+            //繪製球
+            ball.draw();
+
+            //移動球
+            ball.move();
+
+            //碰撞檢查
+            ball.checkCollision();
+
+            //在畫布上繪製邊框，確認球是否飛出界
+            ctx.strokeRect(0, 0, 200, 200);
+        }, 30);
+
+    </script>
+</body>
+</html>

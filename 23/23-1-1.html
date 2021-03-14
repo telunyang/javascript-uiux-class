@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+
+    <script>
+        //取得 canvas 元素
+        let canvas = document.getElementById("canvas");
+        
+        //取得二維圖像的繪製環境(drawing context)
+        let ctx = canvas.getContext("2d");
+
+        /**
+         * 在座標 (0, 0) 繪製一個 10 畫素 x 10 畫素的矩形。
+         * void ctx.fillRect(x, y, width, height); 
+         */
+        ctx.fillRect(0, 0, 10, 10);
+    </script>
+</body>
+</html>

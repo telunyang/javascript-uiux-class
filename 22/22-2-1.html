@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>範例 22-2-1.html</title>
+</head>
+<body>
+    <input type="text" id="txt" value="" />
+    
+    <script>
+    //取得文字欄位的元素，並設定自訂屬性
+    let txt = document.querySelector("input#txt");
+    txt.setAttribute("name", "txt");
+    txt.setAttribute("value", "1234");
+    txt.setAttribute("data-price", "10000");
+    txt.setAttribute("data-title", "文字欄位");
+    txt.setAttribute("data-description", "可以輸入任何文字");
+
+    //輸出自訂屬性到網頁上
+    document.write("<hr />");
+    document.write( txt.getAttribute('data-title') + "<br />" );
+    document.write( txt.getAttribute('data-price') + "<br />" );
+    document.write( txt.getAttribute('data-description') + "<br />" );
+    </script>
+</body>
+</html>

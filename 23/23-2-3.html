@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+
+        //定義畫「實心圓形」還是畫「圓線」的函式
+        let circle = function(x, y, radius, fillCircle){
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+            
+            //true 就填滿，false 就畫線
+            if(fillCircle) {
+                ctx.fill();
+            } else {
+                ctx.stroke();
+            }
+        }
+
+        //繪製蜜蜂的函式
+        let drawBee = function(x, y){
+            ctx.lineWidth = 2;
+
+            //畫框線的顏色
+            ctx.strokeStyle = 'black';
+            
+            //畫實心圓的顏色
+            ctx.fillStyle = 'gold';
+
+            //畫黃色實心圓
+            circle(x, y, 8, true);
+
+            //畫黑色圓圈，當作黃色實心圓的外框
+            circle(x, y, 8, false);
+
+            //畫左上角的圓圈當耳朵
+            circle(x - 5, y - 11, 5, false);
+
+            //畫右上角的圓圈當耳朵
+            circle(x + 5, y - 11, 5, false);
+
+            //畫小小黑色圓，放在黃色實心圓中間靠左
+            circle(x - 2, y - 1, 2, false);
+
+            //畫小小黑色圓，放在黃色實心圓中間靠右
+            circle(x + 2, y - 1, 2, false);
+        }
+
+        //隨機更新蜜蜂的位置
+        let update = function(position){
+            //介於 -2 到 1 之間
+            let offset = Math.random() * 4 - 2;
+
+            //每次 update() 就從當前的 position 偏移一下
+            position += offset;
+
+            //超出右或下邊界，就回到邊界上
+            if(position > 200){
+                position = 200;
+            }
+
+            //超出左或上邊界，就回到邊界上
+            if(position < 0){
+                position = 0
+            }
+
+            //將計算過的 position 回傳
+            return position;
+        }
+
+        //主程式區域
+        let x = 100;
+        let y = 100;
+
+        //設定每 30 毫秒執行一次
+        setInterval(function(){
+            //清空畫布
+            ctx.clearRect(0, 0, 200, 200);
+
+            //畫蜜蜂。初始座標為 (100, 100)
+            drawBee(x, y);
+
+            //改變當前座標 x,y 的值
+            x = update(x);
+            y = update(y);
+
+            //在畫布上繪製邊框，確認蜜蜂是否飛出界
+            ctx.strokeRect(0, 0, 200, 200);
+        }, 30);  
+    </script>
+</body>
+</html>

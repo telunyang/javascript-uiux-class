@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+
+        //移動位置初始值
+        let position = 0;
+
+        //設定每 30 毫秒執行一次
+        setInterval(function(){
+            /**
+             * 清空畫布
+             * void ctx.clearRect(x, y, width, height);
+             */
+            ctx.clearRect(0, 0, 200, 200);
+
+            //繪製矩形
+            ctx.fillRect(position, 0, 20, 20);
+
+            //每執行 setInterval，就將 position 位置加 1
+            position++;
+
+            //若是大於 200 (畫布的寬度)，則從 0 開始
+            if(position > 200){
+                position = 0;
+            }
+        }, 30);
+    </script>
+</body>
+</html>

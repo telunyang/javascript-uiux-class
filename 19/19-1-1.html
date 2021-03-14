@@ -1,0 +1,59 @@
+<!DOCTYPYE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>範例 19-1-1.html</title>
+</head>
+<body>
+    <button name="btn_get" id="btn_get">使用 GET 傳遞</button>
+    <br />
+    <button name="btn_post" id="btn_post">使用 POST 傳遞</button>
+    <br />
+    <button name="btn_ajax" id="btn_ajax">使用 Ajax 傳遞</button>
+
+    <div id="message"></div>
+
+
+    <!-- 引入 jQuery 的函式庫 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    //取得 document 當中的 div#message 元素
+    let div = document.querySelector("div#message");
+
+    $(document).ready(function(){
+        /**
+         * 如果使用 GET 方式，練習時可以使用下列的網址:
+         * https://data.taipei/opendata/datalist/apiAccess?scope=datasetMetadataSearch
+         */
+
+        //使用 GET 傳遞
+        $(document).on('click', 'button#btn_get', function(){
+            $.get("https://httpbin.org/get", function( objJson ) {
+                div.innerHTML = JSON.stringify(objJson);
+            });
+        });
+
+        //使用 POST 傳遞
+        $(document).on('click', 'button#btn_post', function(){
+            $.post("https://httpbin.org/post ", { postMethod: "1" } )
+            .done(function(objJson){
+                div.innerHTML = JSON.stringify(objJson);
+            });
+        });
+
+        //使用 Ajax 傳遞
+        $(document).on('click', 'button#btn_ajax', function(){
+            $.ajax({
+                method: 'POST', // GET
+                url: "https://httpbin.org/post",
+                data: {
+                    postMethod: "1"
+                }
+            }).done(function(objJson) {
+                div.innerHTML = JSON.stringify(objJson);
+            });
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>範例 14-2-1.html</title>
+</head>
+<body>
+
+    <script>
+    //以 function 這個關鍵字的來建立類別（class）
+    var Person = function (firstName) {
+        //以 this 關鍵字作為實體本身
+        this.firstName = firstName;
+    };
+        
+    //用 new 關鍵字來實體化（變成物件）
+    var person1 = new Person("Alex");
+    var person2 = new Person("Bill");
+
+    //輸出兩個 person 的 firstName
+    console.log( person1.firstName );
+    console.log( person2.firstName );
+    </script>
+</body>
+</html>

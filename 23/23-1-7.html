@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        ctx.fillStyle = 'SkyBlue';
+
+        //在這裡，我們要繪製一個「實心」圖形
+        ctx.beginPath();
+        ctx.moveTo(100, 100);
+
+        //由於這次要畫的是實心圖形，所以可以連續使用 ctx.lineTo()，把填充的框線先畫出
+        ctx.lineTo(100, 60);
+        ctx.lineTo(130, 30);
+        ctx.lineTo(160, 60);
+        ctx.lineTo(160, 100);
+        ctx.lineTo(160, 100);
+
+        //繪製實心圖形
+        ctx.fill();
+    </script>
+</body>
+</html>

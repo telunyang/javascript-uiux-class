@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+
+        //更改邊框顏色
+        ctx.strokeStyle = '#7878ff';
+
+        //更改線條粗細
+        ctx.lineWidth = 4;
+
+        //告訴畫布，我們要開始建立繪製路徑
+        ctx.beginPath();
+
+        /**
+         * 想像一下，將畫筆提起，移到畫布 (10, 10) 的座標，再放到畫布上
+         * void ctx.moveTo(x, y);
+         */
+        ctx.moveTo(10, 10);
+
+        /**
+         * 想像一下，從畫筆目前的位置 (10, 10)，畫一條線到 (60, 60) 的座標
+         * void ctx.lineTo(x, y);
+         */
+        ctx.lineTo(60, 60);
+
+        //想像一下，將畫筆提起，移到畫布 (60, 10) 的座標，再放到畫布上
+        ctx.moveTo(60, 10);
+
+        //想像一下，從畫筆目前的位置 (60, 10)，畫一條線到 (10, 60) 的座標
+        ctx.lineTo(10, 60);
+
+        //目前為止，還在想像階段，需要使用 ctx.stroke()，才會實際繪製線條
+        ctx.stroke();
+    </script>
+</body>
+</html>

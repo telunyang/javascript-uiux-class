@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>範例 20-1-1.html</title>
+</head>
+<body>
+    <script>
+    //任何單一字元(任何字元)
+    let str = 'AB123';
+    let pattern = /./g;
+    let match = null;
+    while( (match = pattern.exec(str)) !== null ){
+        console.log(match);
+    }
+
+    //任何空白字元（\f \r \n \t \v）空格、換行、換頁等
+    str = ' AB123 ';
+    pattern = /\s/g;
+    match = null;
+    while( (match = pattern.exec(str)) !== null ){
+        console.log(match);
+    }
+
+    //任何數字
+    str = 'AB123';
+    pattern = /\d/g;
+    match = null;
+    while( (match = pattern.exec(str)) !== null ){
+        console.log(match);
+    }
+
+    //任何文字
+    str = 'AB123';
+    pattern = /\w/g;
+    match = null;
+    while( (match = pattern.exec(str)) !== null ){
+        console.log(match);
+    }
+    </script>
+</body>
+</html>
