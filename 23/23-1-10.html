@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+</head>
+<body>
+    <canvas id="canvas" 
+            width="300" 
+            height="300"></canvas>
+
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d"); 
+
+        /**
+         * 繪製橢圓形
+         * void ctx.ellipse(
+         *      x, y, radiusX, radiusY, rotation, 
+         *      startAngle, endAngle [, anticlockwise]
+         * );
+         */
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        ctx.fillStyle = "#378FD6";
+        ctx.ellipse(
+            150, 150, 80, 100, Math.PI / 2, 
+            0, 2 * Math.PI
+        );
+        ctx.fill();
+
+        //繪製橢圓形的外框
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "#000000";
+        ctx.ellipse(
+            150, 150, 80, 100, Math.PI / 2, 
+            0, 2 * Math.PI
+        );
+        ctx.stroke();
+    </script>
+</body>
+</html>
