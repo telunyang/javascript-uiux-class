@@ -9,10 +9,10 @@
     //定義函式
     function makeFunc(){
         //宣告變數
-        var strName = 'Bill';
+        let strName = 'Bill';
 
-        //內部函式(使用箭頭函式)
-        let displayName = () => {
+        //內部函式
+        let displayName = function() {
             //存取全域變數
             console.log(strName + ' 說: ' + strNum);
         }
