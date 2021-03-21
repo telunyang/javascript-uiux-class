@@ -18,14 +18,14 @@
     //修改屬性
     objPerson.age = 26;
 
-    //暫時顯示物件內容
-    console.log(objPerson);
-
     //刪除屬性
     delete objPerson.skinColor;
 
-    //顯示物件內容
-    console.log(objPerson);
+    //將物件轉成 JSON
+    let strJson = JSON.stringify(objPerson);
+
+    //顯示 JSON 內容
+    console.log(strJson);
     </script>
 </head>
 <body>
