@@ -4,20 +4,26 @@
     <title>範例 22-3-1.html</title>
 </head>
 <body>
-    <p style="color: #7878ff; line-height: 3; font-size: 30px;">Hello World<br />Good job!</p>
-    
-    <script>
-    //取得 p 元素，並取得 style 屬性中的 css 屬性值
-    let p = document.getElementsByTagName('p')[0];
-    document.write("<br />");
-    document.write(p.style.color + "<br />");
-    document.write(p.style.lineHeight + "<br />");
-    document.write(p.style.fontSize + "<br />");
+    <form id="myForm" method="post" action="">
+        <lable>您的身分證字號：</lable>
+        <input type="text" id="idNum" value="" />
+        <input type="submit" id="btn" value="檢查" />
+    </form>
 
-    //設定 p 的 color 為 #ff0000
-    p.style.color = '#ff0000';
-    p.style['font-size'] = '80px'; //屬性可以用 css 格式
-    p.style['backgroundColor'] = '#CFEE99'; //屬性可以用 javascript 格式
+    <script>
+    document.getElementById('btn').addEventListener('click', function(event){
+        //.preventDefault() 是讓元素本身的預設功能失去作用，單純作為觸發用的元素
+        event.preventDefault();
+        
+        let elm = document.getElementById('idNum');
+        let pattern = /[A-Z]\d[0-9]{8}/g;
+        let match = null;
+        if( (match = pattern.exec( elm.value )) !== null ){
+            alert('身分證格式正確!');
+        } else {
+            alert('你的身分證格式有誤…');
+        }
+    });
     </script>
 </body>
 </html>

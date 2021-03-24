@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>範例 21-2-2.html</title>
+</head>
+<body>
+    <ul id="myList">
+        <li>Item 01</li>
+        <li>Item 02</li>
+        <li>Item 03</li>
+    </ul>
+    
+    <script>
+    // 取得容器
+    var myList = document.getElementById('myList');
+    
+    // 建立新的 <li> 元素
+    var newList = document.createElement('li');
+    
+    // 建立 textNode 文字節點
+    var textNode = document.createTextNode("Hello world!");
+    
+    // 透過 appendChild 將 textNode 加入至 newList
+    newList.appendChild(textNode);
+    
+    // 透過 appendChild 將 newList 加入至 myList
+    myList.appendChild(newList);
+    </script>
+</body>
+</html>

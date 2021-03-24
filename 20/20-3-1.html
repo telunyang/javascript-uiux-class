@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>範例 20-3-1.html</title>
+    <title>範例 21-3-1.html</title>
 </head>
 <body>
-    <form id="myForm" method="post" action="">
-        <lable>您的身分證字號：</lable>
-        <input type="text" id="idNum" value="" />
-        <input type="submit" id="btn" value="檢查" />
-    </form>
-
+    <ul id="myList">
+        <li>Item 01</li>
+        <li>Item 02</li>
+        <li>Item 03</li>
+    </ul>
+    
     <script>
-    document.getElementById('btn').addEventListener('click', function(event){
-        //.preventDefault() 是讓元素本身的預設功能失去作用，單純作為觸發用的元素
-        event.preventDefault();
-        
-        let elm = document.getElementById('idNum');
-        let pattern = /[A-Z]\d[0-9]{8}/g;
-        let match = null;
-        if( (match = pattern.exec( elm.value )) !== null ){
-            alert('身分證格式正確!');
-        } else {
-            alert('你的身分證格式有誤…');
-        }
-    });
+    // 取得容器
+    var myList  = document.getElementById('myList');
+    
+    // 取得 "<li>Item 02</li>" 的元素
+    var removeNode = document.querySelectorAll('li')[1];
+    
+    // 將 myList 下的 removeNode 節點移除
+    myList.removeChild(removeNode);
     </script>
 </body>
 </html>

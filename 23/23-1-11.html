@@ -17,103 +17,101 @@
     <input type="file" name="fileUpload">
 
     <script>
-        let canvas = document.getElementById("canvas");
-        let ctx = canvas.getContext("2d"); 
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d"); 
 
-        //選擇 file 元素
-        let fileUpload = document.querySelector('input[type="file"][name="fileUpload"]');
+    //選擇 file 元素
+    let fileUpload = document.querySelector('input[type="file"][name="fileUpload"]');
 
+    /**
+     * 增加 accept 屬性，設定允許上傳的檔案格式
+     * 可以指定副檔名，也可以參考網際網路媒體型式（media type）
+     * 
+     * 例如
+     * fileUpload.accept = 'image/*';
+     * fileUpload.accept = '.png,.jpg';
+     * 
+     * 參考連結: 
+     * https://zh.wikipedia.org/wiki/%E4%BA%92%E8%81%94%E7%BD%91%E5%AA%92%E4%BD%93%E7%B1%BB%E5%9E%8B
+     */
+        fileUpload.accept = '.png,.jpg';
+
+    //監聽上傳檔案的元素，選擇檔案後，
+    fileUpload.addEventListener("change", function(event){
         /**
-         * 增加 accept 屬性，設定允許上傳的檔案格式
-         * 可以指定副檔名，也可以參考網際網路媒體型式（media type）
-         * 
-         * 例如
-         * fileUpload.accept = 'image/*';
-         * fileUpload.accept = '.png,.jpg';
-         * 
-         * 參考連結: 
-         * https://zh.wikipedia.org/wiki/%E4%BA%92%E8%81%94%E7%BD%91%E5%AA%92%E4%BD%93%E7%B1%BB%E5%9E%8B
-         */
-         fileUpload.accept = '.png,.jpg';
+         * 在這裡的 this 指的是 fileUpload 這個 input 元素，
+         * this 也可以改成 event.target
+         */ 
+        let file = this.files[0];
 
-        //監聽上傳檔案的元素，選擇檔案後，
-        fileUpload.addEventListener("change", function(event){
+        //建立 FileReader
+        var reader = new FileReader();
+
+        //FileReader 讀取檔案完成時的事件處理
+        reader.onload = function(e){
             /**
-             * 在這裡的 this 指的是 fileUpload 這個 input 元素，
-             * this 也可以改成 event.target
+             * 這裡的 this 指的是 reader 本身，
+             * this.result 是在讀取圖片後，
+             * 將打開後的一堆文字(看似亂碼)，
+             * 用 base64 進行編碼後的資料內容
              */ 
-            let file = this.files[0];
+            let strImgBase64 = this.result;
 
-            //建立 FileReader
-            var reader = new FileReader();
+            //建立 Image 物件
+            let img = new Image();
+            
+            //指定 img 的 src 屬性值 (圖片內容編碼後的資料內容)
+            img.src = strImgBase64;
 
-            //FileReader 讀取檔案完成時的事件處理
-            reader.onload = function(e){
+            //當圖片讀取完成時的事件處理
+            img.onload = function(e){
                 /**
-                 * 這裡的 this 指的是 reader 本身，
-                 * this.result 是在讀取圖片後，
-                 * 將打開後的一堆文字(看似亂碼)，
-                 * 用 base64 進行編碼後的資料內容
-                 */ 
-                let strImgBase64 = this.result;
-
-                //建立 Image 物件
-                let img = new Image();
+                 * 【繪製圖片】
+                 * 註: d 是指 destination (畫布)
+                 * 
+                 * img: Image 物件
+                 * dx: image 的左上角，在目標畫布上的 X 軸坐標。
+                 * dy: image 的左上角，在目標畫布上的 Y 軸坐標。
+                 * dWidth: image 在目標畫布上繪製的寬度(有縮放效果)。
+                 * dHeight: image 在目標畫布上繪製的高度(有縮放效果)。
+                 * 
+                 * void ctx.drawImage(image, dx, dy);
+                 * void ctx.drawImage(image, dx, dy, dWidth, dHeight);
+                 */
+                ctx.drawImage(img, 100, 100, 250, 250);
                 
-                //指定 img 的 src 屬性值 (圖片內容編碼後的資料內容)
-                img.src = strImgBase64;
-
-                //當圖片讀取完成時的事件處理
-                img.onload = function(e){
-                    /**
-                     * 【繪製圖片】
-                     * 註: d 是指 destination (畫布)
-                     * 
-                     * img: Image 物件
-                     * dx: image 的左上角，在目標畫布上的 X 軸坐標。
-                     * dy: image 的左上角，在目標畫布上的 Y 軸坐標。
-                     * dWidth: image 在目標畫布上繪製的寬度(有縮放效果)。
-                     * dHeight: image 在目標畫布上繪製的高度(有縮放效果)。
-                     * 
-                     * void ctx.drawImage(image, dx, dy);
-                     * void ctx.drawImage(image, dx, dy, dWidth, dHeight);
-                     */
-                    ctx.drawImage(img, 100, 100, 250, 250);
-                    
-                    /** 
-                     * 【繪製剪栽的圖片】
-                     * 註: s 是指 source (來源圖片)
-                     * 
-                     * sx: 指定原始圖片當中某個 x 座標
-                     * sy: 指定原始圖片當中某個 y 座標
-                     * sWidth: 指定 x 座標後，寬度多少
-                     * sHeight: 指定 y 座標後，高度多少
-                     * 
-                     * 註: d 是指 destination (畫布)
-                     * 
-                     * dx: 來源圖片剪栽後，指定從畫布的哪一個 x 座標開始畫起。
-                     * dy: 來源圖片剪栽後，指定從畫布的哪一個 y 座標開始畫起。
-                     * dWidth: 來源圖片剪栽後，要繪製在畫布上的圖片寬度(無縮放效果)。
-                     * dHeight: 來源圖片剪栽後，要繪製在畫布上的圖片高度(無縮放效果)。
-                     * 
-                     * void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-                     * 
-                     * 參考圖片: https://mdn.mozillademos.org/files/225/Canvas_drawimage.jpg
-                     */ 
-                    // ctx.drawImage(img, 0, 0, 200, 200, 250, 250, 150, 100);
-                }
+                /** 
+                 * 【繪製剪栽的圖片】
+                 * 註: s 是指 source (來源圖片)
+                 * 
+                 * sx: 指定原始圖片當中某個 x 座標
+                 * sy: 指定原始圖片當中某個 y 座標
+                 * sWidth: 指定 x 座標後，寬度多少
+                 * sHeight: 指定 y 座標後，高度多少
+                 * 
+                 * 註: d 是指 destination (畫布)
+                 * 
+                 * dx: 來源圖片剪栽後，指定從畫布的哪一個 x 座標開始畫起。
+                 * dy: 來源圖片剪栽後，指定從畫布的哪一個 y 座標開始畫起。
+                 * dWidth: 來源圖片剪栽後，要繪製在畫布上的圖片寬度(無縮放效果)。
+                 * dHeight: 來源圖片剪栽後，要繪製在畫布上的圖片高度(無縮放效果)。
+                 * 
+                 * void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+                 * 
+                 * 參考圖片: https://mdn.mozillademos.org/files/225/Canvas_drawimage.jpg
+                 */ 
+                // ctx.drawImage(img, 0, 0, 200, 200, 250, 250, 150, 100);
             }
+        }
 
-            //讀取錯誤的事件處理
-            reader.onerror = function(e){
-                console.log(e);
-            }
+        //讀取錯誤的事件處理
+        reader.onerror = function(e){
+            console.log(e);
+        }
 
-            //將圖片內容打開後，轉換成 base64 資料型別
-            reader.readAsDataURL(file);   
-        });
-
-        
+        //將圖片內容打開後，轉換成 base64 資料型別
+        reader.readAsDataURL(file);   
+    });
     </script>
 </body>
 </html>

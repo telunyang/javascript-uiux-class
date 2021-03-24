@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>範例 21-2-1.html</title>
+    <title>範例 22-2-1.html</title>
 </head>
 <body>
+    <input type="text" id="txt" value="" />
+    
     <script>
-    //建立新的 div 元素 newDiv 
-    var newDiv = document.createElement('div');
+    //取得文字欄位的元素，並設定自訂屬性
+    let txt = document.querySelector("input#txt");
+    txt.setAttribute("name", "txt");
+    txt.setAttribute("value", "1234");
+    txt.setAttribute("data-price", "10000");
+    txt.setAttribute("data-title", "文字欄位");
+    txt.setAttribute("data-description", "可以輸入任何文字");
 
-    //指定屬性
-    newDiv.id = "myNewDiv";
-    newDiv.className = "box";
-
-    //建立 textNode 文字節點
-    var textNode = document.createTextNode("Hello world!");
-
-    //透過 newDiv.appendChild 將 textNode 加入至 newDiv
-    newDiv.appendChild(textNode);
-
-    //透過 document.body.appendChild 來加入 newDiv 到網頁當中
-    document.body.appendChild(newDiv);
+    //輸出自訂屬性到網頁上
+    document.write("<hr />");
+    document.write( txt.getAttribute('data-title') + "<br />" );
+    document.write( txt.getAttribute('data-price') + "<br />" );
+    document.write( txt.getAttribute('data-description') + "<br />" );
     </script>
 </body>
 </html>

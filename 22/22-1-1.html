@@ -4,24 +4,39 @@
     <title>範例 22-1-1.html</title>
 </head>
 <body>
-    <button id="btn01">按鈕01</button>
-    <button id="btn02" name="btn02">按鈕02</button>
-    <button id="btn03" onclick="javascript: alert('btn03');">按鈕03</button>
-    
     <script>
-    //取得第一個按鈕元素，並設定屬性
-    let btn01 = document.querySelectorAll("button")[0];
-    btn01.setAttribute("name", "btn01"); //設定 name 屬性
-    btn01.setAttribute("disabled", ""); //設定 disabled 屬性
+    //任何單一字元(任何字元)
+    let str = 'AB123';
+    let pattern = /./g;
+    let match = null;
+    console.log(str.match(pattern));
+    while( (match = pattern.exec(str)) !== null ){
+        console.log(match);
+    }
 
-    //取得第二個按鈕元素，並取得屬性值
-    let btn02 = document.querySelectorAll("button")[1];
-    let strName = btn02.getAttribute("name");
-    document.write(strName);
+    //任何空白字元（\f \r \n \t \v）空格、換行、換頁等
+    str = ' AB123 ';
+    pattern = /\s/g;
+    match = null;
+    while( (match = pattern.exec(str)) !== null ){
+        console.log(match);
+    }
 
-    //取得第三個按鈕，刪除 onclick 屬性
-    let btn03 = document.querySelectorAll("button")[2];
-    btn03.removeAttribute("onclick");
+    //任何數字
+    str = 'AB123';
+    pattern = /\d/g;
+    match = null;
+    while( (match = pattern.exec(str)) !== null ){
+        console.log(match);
+    }
+
+    //任何文字
+    str = 'AB123';
+    pattern = /\w/g;
+    match = null;
+    while( (match = pattern.exec(str)) !== null ){
+        console.log(match);
+    }
     </script>
 </body>
 </html>
